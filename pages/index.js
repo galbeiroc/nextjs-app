@@ -18,9 +18,8 @@ export default function Home({ articles }) {
 // }
 
 
-export const getStaticProps = async(context) => {
-  const response = await fetch(`${server}/api/articles/${context.params.id}`)
-  const article = await response.json()
-
-  return { props: { article } }
+export const getStaticProps = async () => {
+  const response = await fetch(`${server}/api/articles`)
+  const articles = await response.json()
+  return { props:{ articles} }
 }
