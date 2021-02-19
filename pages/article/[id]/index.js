@@ -13,31 +13,8 @@ export default function article({ article }) {
   )
 }
 
-export const getStaticProps = async(context) => {
-  const response = await fetch(`http://jsonplaceholder.typicode.com/posts/${context.params.id}`)
-  const article = await response.json()
-
-  return {
-    props: { article }
-  }
-}
-
-export const getStaticPaths = async () => {
-  const response = await fetch(`http://jsonplaceholder.typicode.com/posts`)
-  const articles = await response.json()
-
-  const ids = articles.map((article) => article.id)
-  const paths = ids.map((id) => ({ params: { id: id.toString() }}))
-
-  return { 
-    paths,
-    fallback: false
-  }
-}
-
-
 // export const getStaticProps = async(context) => {
-//   const response = await fetch(`${server}/api/articles/${context.params.id}`)
+//   const response = await fetch(`http://jsonplaceholder.typicode.com/posts/${context.params.id}`)
 //   const article = await response.json()
 
 //   return {
@@ -46,7 +23,7 @@ export const getStaticPaths = async () => {
 // }
 
 // export const getStaticPaths = async () => {
-//   const response = await fetch(`${server}/api/articles`)
+//   const response = await fetch(`http://jsonplaceholder.typicode.com/posts`)
 //   const articles = await response.json()
 
 //   const ids = articles.map((article) => article.id)
@@ -57,3 +34,26 @@ export const getStaticPaths = async () => {
 //     fallback: false
 //   }
 // }
+
+
+export const getStaticProps = async(context) => {
+  const response = await fetch(`${server}/api/articles/${context.params.id}`)
+  const article = await response.json()
+
+  return {
+    props: { article }
+  }
+}
+
+export const getStaticPaths = async () => {
+  const response = await fetch(`${server}/api/articles`)
+  const articles = await response.json()
+
+  const ids = articles.map((article) => article.id)
+  const paths = ids.map((id) => ({ params: { id: id.toString() }}))
+
+  return { 
+    paths,
+    fallback: false
+  }
+}
