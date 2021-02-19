@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import Meta from '../../../components/Meta'
 
+import { server } from '../../../config/config'
+
 export default function article({ article }) {
   return (
     <>
